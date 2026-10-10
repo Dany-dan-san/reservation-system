@@ -1,0 +1,20 @@
+
+<%= form_with model: room, class: "room-form" do |form| %>
+
+  <% if room.errors.any? %>
+    <ul>
+      <% room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form.label :name, "Room Name" %>
+  <%= form.text_field :name, required: true %>
+
+  <%= form.label :capacity, "Capacity" %>
+  <%= form.number_field :capacity, min: 1, step: 1, required: true %>
+
+  <%= form.submit "Create Room" %>
+
+<% end %>

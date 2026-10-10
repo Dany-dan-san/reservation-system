@@ -1,0 +1,19 @@
+<main>
+  <section class="platform-hero">
+    <header class="platform-header">
+      <%= link_to "Booking Platform", rooms_path, class: "platform-name" %>
+      <nav class="platform-navigation" aria-label="Main navigation">
+        <%= link_to "Rooms", rooms_path %>
+        <%= link_to "Reservations", reservations_path, class: "current-page" %>
+        <%= link_to "Your Reservations", "/my-reservations", class: "navigation-action" %>
+      </nav>
+    </header>
+  </section>
+  <section class="rooms-content">
+    <div class="rooms-container">
+      <%= link_to "← Back to Reservations", reservations_path, class: "room-back-link" %>
+      <h1>New Reservation</h1>
+      <%= render "form", reservation: @reservation, rooms: @rooms %>
+    </div>
+  </section>
+</main>

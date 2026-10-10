@@ -1,0 +1,298 @@
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Manrope:wght@600;700;800&display=swap");
+
+/* =========================================================
+   GLOBAL TYPOGRAPHY
+   ========================================================= */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #11141b;
+  font: 16px/1.6 "DM Sans", sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3, h4, h5, h6, .platform-name {
+  font-family: "Manrope", sans-serif;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+}
+
+h1, .platform-name { font-size: 32px; font-weight: 800; }
+h2 { font-size: 28px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+h1 { margin: 0 0 30px; }
+
+/* =========================================================
+   PLATFORM HEADER AND NAVIGATION
+   ========================================================= */
+
+.platform-header {
+  position: relative;
+  z-index: 2;
+  width: min(1180px, calc(100% - 64px));
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.platform-name { white-space: nowrap; }
+
+.platform-navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.platform-navigation a:hover,
+.platform-navigation .current-page {
+  color: #5f29c7;
+}
+
+.platform-navigation .navigation-action {
+  padding: 10px 17px;
+  border-radius: 999px;
+  background: #11141b;
+  color: #fff;
+}
+
+.platform-navigation .navigation-action:hover {
+  background: #5f29c7;
+  color: #fff;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.platform-hero {
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(to bottom, #fff 25%, rgba(255,255,255,.15)),
+    linear-gradient(90deg, #0ed2da, #5f29c7);
+}
+
+/* =========================================================
+   CONTENT AND TABLES
+   ========================================================= */
+
+.room-back-link {
+  display: inline-block;
+  margin: 15px 0 24px;
+  color: #5f29c7;
+  font-weight: 700;
+}
+
+.rooms-content {
+  padding: 55px 0 90px;
+  background: #fff;
+}
+
+.rooms-container {
+  width: min(1180px, calc(100% - 64px));
+  margin: auto;
+}
+
+.rooms-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #e6e7ec;
+  border-radius: 20px;
+}
+
+.rooms-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.rooms-table th,
+.rooms-table td {
+  padding: 17px 23px;
+  border-bottom: 1px solid #e6e7ec;
+  font-size: 16px;
+}
+
+.rooms-table .table-center { text-align: center; }
+
+.rooms-table th {
+  background: #f6f7f9;
+  font-weight: 700;
+}
+
+.rooms-table tr:last-child td { border-bottom: 0; }
+.rooms-table tbody tr:hover { background: #fafbfc; }
+
+.room-details-link {
+  display: inline-block;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #11141b;
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.room-details-link:hover { background: #5f29c7; }
+
+/* =========================================================
+   ROOM CREATION AND SHARED FORMS
+   ========================================================= */
+
+.room-creation { margin-top: 28px; }
+
+.room-creation summary {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: #11141b;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.room-form {
+  display: grid;
+  gap: 12px;
+  max-width: 450px;
+  margin-top: 24px;
+}
+
+.room-form input {
+  padding: 12px;
+  border: 1px solid #e6e7ec;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.room-form input[type="submit"] {
+  background: #11141b;
+  color: white;
+  cursor: pointer;
+}
+
+.reservation-form select {
+  padding: 12px;
+  border: 1px solid #e6e7ec;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.reservation-errors {
+  color: #a52639;
+  margin: 0;
+  padding-left: 22px;
+}
+
+/* =========================================================
+   RESERVATION INLINE EDITING
+   ========================================================= */
+
+.reservation-edit-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.reservation-edit-toggle:focus-visible + .reservation-edit-link {
+  outline: 2px solid #5f29c7;
+  outline-offset: 3px;
+}
+
+.reservation-edit-row { display: none; }
+
+.reservation-row:has(.reservation-edit-toggle:checked) + .reservation-edit-row,
+.reservation-edit-row.is-open {
+  display: table-row;
+}
+
+.reservation-edit-row td { background: #f6f7f9; }
+.reservation-edit-row h2 { margin: 0 0 16px; }
+
+/* =========================================================
+   RESERVATION ACTION ICONS
+   ========================================================= */
+
+.reservation-actions { white-space: nowrap; }
+
+.reservation-action-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.reservation-action-group form {
+  display: flex;
+  margin: 0;
+}
+
+.reservation-action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid #e6e7ec;
+  border-radius: 10px;
+  background: #fff;
+  color: #373b44;
+  font: inherit;
+  cursor: pointer;
+}
+
+.reservation-action-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* View: Dark grey (default) */
+/* Edit: Purple */
+.reservation-edit-link.reservation-action-icon {
+  color: #5f29c7;
+}
+
+/* Delete: Red */
+.reservation-action-delete {
+  color: #b42318;
+}
+
+/* Shared hover effect: Preserve each icon's color */
+.reservation-action-icon:hover {
+  border-color: currentColor;
+  background: #f6f7f9;
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .platform-header { flex-wrap: wrap; }
+  .platform-navigation { flex-wrap: wrap; gap: 12px 20px; }
+  .platform-hero { min-height: 165px; height: auto; }
+  .rooms-content { padding-top: 35px; }
+  .rooms-table th, .rooms-table td { padding: 13px; }
+}

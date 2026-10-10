@@ -1,0 +1,106 @@
+
+<main>
+  <section class="platform-hero">
+    <header class="platform-header">
+      <%= link_to "Booking Platform", rooms_path, class: "platform-name" %>
+
+      <nav class="platform-navigation" aria-label="Main navigation">
+        <%= link_to "Rooms", rooms_path %>
+        <%= link_to "Reservations", reservations_path, class: "current-page" %>
+      </nav>
+    </header>
+  </section>
+
+  <section class="rooms-content">
+    <div class="rooms-container">
+      <h1>All Reservations</h1>
+
+      <div class="rooms-table-wrapper">
+        <table class="rooms-table">
+          <thead>
+            <tr>
+              <th scope="col">Room</th>
+              <th scope="col" class="table-center">Start</th>
+              <th scope="col" class="table-center">End</th>
+              <th scope="col" class="table-center">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @reservations.each do |reservation| %>
+              <tr class="reservation-row">
+                <td><%= reservation.room.name %></td>
+                <td class="table-center"><%= reservation.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+                <td class="table-center"><%= reservation.end_date.strftime("%d/%m/%Y %H:%M") %></td>
+                <td class="reservation-actions">
+                  <div class="reservation-action-group">
+
+                    <%# View %>
+                    <%= link_to reservation_path(reservation),
+                        class: "reservation-action-icon",
+                        title: "View reservation",
+                        aria: { label: "View reservation #{reservation.id}" } do %>
+                      <svg viewBox="0 0 24 24">
+                        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    <% end %>
+
+                    <%# Edit %>
+                    <input type="checkbox"
+                          id="edit-toggle-<%= reservation.id %>"
+                          class="reservation-edit-toggle"
+                          aria-label="Toggle edit form for reservation <%= reservation.id %>">
+
+                    <label for="edit-toggle-<%= reservation.id %>"
+                          class="reservation-edit-link reservation-action-icon"
+                          title="Edit reservation">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M12 20h9"/>
+                        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/>
+                      </svg>
+                    </label>
+
+                    <%# Delete %>
+                    <%= button_to reservation_path(reservation),
+                        method: :delete,
+                        form: { data: { turbo_confirm: "Delete this reservation?" } },
+                        class: "reservation-action-icon reservation-action-delete",
+                        title: "Delete reservation",
+                        aria: { label: "Delete reservation #{reservation.id}" } do %>
+                      <svg viewBox="0 0 24 24">
+                        <path d="M3 6h18M8 6V4h8v2M5 6l1 14h12l1-14M10 10v7M14 10v7"/>
+                      </svg>
+                    <% end %>
+
+                  </div>
+                </td>
+
+
+              </tr>
+
+              <tr id="edit-reservation-<%= reservation.id %>"
+                  class="reservation-edit-row <%= 'is-open' if @editing_reservation&.id == reservation.id %>">
+                <td colspan="4">
+                  <h2>Edit Reservation #<%= reservation.id %></h2>
+
+                  <%= render "form",
+                      reservation: (@editing_reservation&.id == reservation.id ? @editing_reservation : reservation),
+                      rooms: @rooms %>
+
+                  <%= link_to "Cancel", reservations_path, class: "room-back-link" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <details class="room-creation" <%= "open" if @new_reservation.errors.any? %>>
+        <summary>+ Add Reservation</summary>
+
+        <%= render "form", reservation: @new_reservation, rooms: @rooms %>
+      </details>
+    </div>
+  </section>
+</main>

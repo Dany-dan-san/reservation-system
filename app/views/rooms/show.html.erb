@@ -1,0 +1,39 @@
+<section class="platform-hero">
+  <header class="platform-header">
+    <%= link_to "Booking Platform", rooms_path, class: "platform-name" %>
+    <nav class="platform-navigation" aria-label="Main navigation">
+      <%= link_to "Rooms", rooms_path, class: "current-page" %>
+      <%= link_to "Reservations", "/reservations" %>
+    </nav>
+  </header>
+</section>
+
+<main class="rooms-content">
+  <div class="rooms-container">
+    <%= link_to "← Back to Rooms", rooms_path, class: "room-back-link" %>
+    <h1><%= @room.name %></h1>
+    <p>Capacity: <strong><%= @room.capacity %></strong></p>
+
+    <h2>Reservations</h2>
+    <% if @reservations.any? %>
+      <div class="rooms-table-wrapper">
+        <table class="rooms-table">
+          <thead>
+            <tr><th>ID</th><th>Start</th><th>End</th></tr>
+          </thead>
+          <tbody>
+            <% @reservations.each do |reservation| %>
+              <tr>
+                <td><%= reservation.id %></td>
+                <td><%= reservation.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+                <td><%= reservation.end_date.strftime("%d/%m/%Y %H:%M") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p>No reservations for this room yet.</p>
+    <% end %>
+  </div>
+</main>

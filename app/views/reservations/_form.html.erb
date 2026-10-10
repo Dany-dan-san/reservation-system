@@ -1,0 +1,21 @@
+<%= form_with model: reservation, class: "room-form reservation-form" do |form| %>
+  <% if reservation.errors.any? %>
+    <ul class="reservation-errors">
+      <% reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form.label :room_id, "Select Room" %>
+  <%= form.collection_select :room_id, rooms, :id, :name,
+                             { prompt: "Select a room" }, { required: true } %>
+
+  <%= form.label :start_date, "Start date and time" %>
+  <%= form.datetime_local_field :start_date, required: true %>
+
+  <%= form.label :end_date, "End date and time" %>
+  <%= form.datetime_local_field :end_date, required: true %>
+
+  <%= form.submit(reservation.persisted? ? "Save Changes" : "Create Reservation") %>
+<% end %>

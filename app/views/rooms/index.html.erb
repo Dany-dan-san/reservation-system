@@ -1,0 +1,49 @@
+
+<main>
+  <section class="platform-hero">
+    <header class="platform-header">
+      <%= link_to "Booking Platform", rooms_path, class: "platform-name" %>
+
+      <nav class="platform-navigation" aria-label="Main navigation">
+        <%= link_to "Rooms", rooms_path, class: "current-page" %>
+        <%= link_to "Reservations", "/reservations" %>
+      </nav>
+    </header>
+  </section>
+
+  <section class="rooms-content">
+    <div class="rooms-container">
+      <h1>All Rooms</h1>
+
+      <div class="rooms-table-wrapper">
+        <table class="rooms-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col" class="table-center">Capacity</th>
+              <th scope="col" class="table-center">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @rooms.each do |room| %>
+              <tr>
+                <td><%= room.name %></td>
+                <td class="table-center"><%= room.capacity %></td>
+                <td class="table-center">
+                  <%= link_to "View Room →", room_path(room), class: "room-details-link" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <details class="room-creation" <%= "open" if @room.errors.any? %>>
+        <summary>+ Add New Room</summary>
+        <%= render "form", room: @room %>
+      </details>
+
+    </div>
+  </section>
+</main>
